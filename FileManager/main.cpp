@@ -16,6 +16,12 @@ int main(int argc, char *argv[])
 
 
     if(info.completeSuffix() == "txt")
+    {
         qDebug() << info.completeSuffix();
+        while(1)
+        {
+            //checkfile
+        }
+    }
     return a.exec();
 }
