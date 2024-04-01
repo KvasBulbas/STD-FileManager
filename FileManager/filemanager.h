@@ -6,15 +6,23 @@
 class FileManager
 {
 public:
-    FileManager();
 
-    void checkFile()
+    bool addFile(const QString& path);
+    static FileManager& instanse()
     {
+        static FileManager s;
 
+        return s;
     }
 
+
 private:
-    std::vector<QFileInfo> abc;
+    FileManager();
+    ~FileManager();
+    FileManager(FileManager const&);
+    FileManager& operator=(FileManager const&);
+    std::vector<QFileInfo> files;
+
 };
 
 #endif // FILEMANAGER_H
