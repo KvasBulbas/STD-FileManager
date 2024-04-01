@@ -7,13 +7,16 @@ class FileManager
 {
 public:
 
-    bool addFile(const QString& path);
     static FileManager& instanse()
     {
         static FileManager s;
 
         return s;
     }
+
+    bool addFile(const QString& path);
+    bool isChanged(const QFileInfo& info);
+    void checkFiles();
 
 
 private:
