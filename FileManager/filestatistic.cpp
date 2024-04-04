@@ -1,4 +1,5 @@
 #include "filestatistic.h"'
+#include <QDebug>
 
 FileStatistic::FileStatistic()
 {
@@ -18,10 +19,14 @@ FileStatistic::FileStatistic(QFileInfo& file)
     _lastChange = file.metadataChangeTime();
 }
 
+FileStatistic::~FileStatistic()
+{
+
+}
+
 void FileStatistic::newData(QFileInfo& file)
 {
     _lastSize = file.size();
-    _path = file.path();
     _lastName = file.fileName();
     _lastChange = file.metadataChangeTime();
 }
@@ -34,32 +39,19 @@ bool FileStatistic::pathCheck(QFileInfo &file)
     return false;
 }
 
-bool FileStatistic::isChanged(QFileInfo& file)
+bool FileStatistic::isChanged()
 {
-    bool k = false;
-    if(file.fileName() != _lastName)
-    {
-        //class console "name is changed"
-        k = true;
-    }
+    QString absolutePath = _path + '/' + _lastName;
+    QFileInfo file(absolutePath);
 
-    if(file.size() != _lastSize)
-    {
-        //
-        k = true;
-    }
 
     if(file.metadataChangeTime() != _lastChange)
-    {
-        //
-        k = true;
-    }
-
-    if(k)
     {
         newData(file);
         return true;
     }
+
+
     return false;
 }
 

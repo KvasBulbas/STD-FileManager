@@ -2,6 +2,7 @@
 #define FILEMANAGER_H
 #include <QFileInfo>
 #include <vector>
+#include "filestatistic.h"
 
 class FileManager
 {
@@ -24,7 +25,7 @@ private:
     ~FileManager();
     FileManager(FileManager const&);
     FileManager& operator=(FileManager const&);
-    std::vector<QFileInfo> files;
+    std::vector<FileStatistic> files;
 
 };
 

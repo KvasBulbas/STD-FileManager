@@ -9,8 +9,9 @@ class FileStatistic
 public:
     FileStatistic();
     FileStatistic(QFileInfo& file);
+    ~FileStatistic();
 
-    bool isChanged(QFileInfo& file);
+    bool isChanged();
     bool pathCheck(QFileInfo& file);
 
 
