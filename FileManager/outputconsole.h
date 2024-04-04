@@ -21,8 +21,8 @@ public:
 
 public slots:
     void deleteFileMessage(FileStatistic& stats);
-    //void changeFileMessage(FileStatistic& stats);
-    void changeFileMessage();
+    void changeFileMessage(FileStatistic& stats);
+
 
 
 

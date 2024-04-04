@@ -24,11 +24,11 @@ public:
 
 signals:
     //void changed(FileStatistic& stats);
-    void changed();
+    void changed(FileStatistic& stats);
     void deleted(FileStatistic& stats);
 
 public slots:
-    void abc();
+    void abc(FileStatistic& stats);
 
 private:
     FileManager();

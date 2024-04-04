@@ -50,7 +50,7 @@ void FileManager::checkFiles()
         if(iter->isChanged())
         {
            //emit changed(iter);
-            emit changed();
+            emit changed(*iter);
            qDebug() << "File is changed";
         }
 
@@ -58,7 +58,7 @@ void FileManager::checkFiles()
 }
 
 
-void FileManager::abc()
+void FileManager::abc(FileStatistic& stats)
 {
     qDebug() << "asdasdads";
 }

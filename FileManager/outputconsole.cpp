@@ -18,12 +18,8 @@ void ConsoleOfOutput::deleteFileMessage(FileStatistic& stats)
 }
 
 
-//void ConsoleOfOutput::changeFileMessage(FileStatistic& stats)
-//{
-//    qDebug() << "File" << stats.getPath() << "is changed." << "New size:" << stats.getSize();
-//}
-
-void ConsoleOfOutput::changeFileMessage()
+void ConsoleOfOutput::changeFileMessage(FileStatistic& stats)
 {
-    qDebug() << "asdasdads";
+    qDebug() << "File" << stats.getPath() << "is changed." << "New size:" << stats.getSize();
 }
+

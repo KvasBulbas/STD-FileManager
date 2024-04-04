@@ -26,13 +26,14 @@ int main(int argc, char *argv[])
 
 //    FileManager& manager = FileManager::instanse();
 //    ConsoleOfOutput& console = ConsoleOfOutput::instanse();
+    FileManager &s = FileManager::instanse();
+    ConsoleOfOutput &console = ConsoleOfOutput::instanse();
+    QObject::connect(&s, &FileManager::changed, &console, &ConsoleOfOutput::changeFileMessage);
 
-    QObject::connect(FileManager::instanse(), FileManager::changed, FileManager::instanse(), FileManager::abc);
-
-//    if(manager.addFile("C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW.txt") && manager.addFile("C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW1.txt"))
-//        while(1)
-//        {
-//            manager.checkFiles();
-//        }
+    if(s.addFile("C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW.txt") && s.addFile("C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW1.txt"))
+        while(1)
+        {
+            s.checkFiles();
+        }
         return a.exec();
 }
