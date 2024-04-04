@@ -12,7 +12,9 @@ public:
     ~FileStatistic();
 
     bool isChanged();
-    bool pathCheck(QFileInfo& file);
+    bool pathCheck();
+    QString getPath();
+    int getSize();
 
 
 private:

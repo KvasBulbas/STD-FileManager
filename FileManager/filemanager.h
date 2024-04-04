@@ -2,10 +2,13 @@
 #define FILEMANAGER_H
 #include <QFileInfo>
 #include <vector>
+#include <List>
 #include "filestatistic.h"
+#include "outputconsole.h"
 
-class FileManager
+class FileManager : public QObject
 {
+    Q_OBJECT
 public:
 
     static FileManager& instanse()
@@ -16,16 +19,23 @@ public:
     }
 
     bool addFile(const QString& path);
-    bool isChanged(const QFileInfo& info);
+    bool deleteFile(const FileStatistic* path);
     void checkFiles();
 
+signals:
+    //void changed(FileStatistic& stats);
+    void changed();
+    void deleted(FileStatistic& stats);
+
+public slots:
+    void abc();
 
 private:
     FileManager();
     ~FileManager();
     FileManager(FileManager const&);
     FileManager& operator=(FileManager const&);
-    std::vector<FileStatistic> files;
+    std::list<FileStatistic> files;
 
 };
 

@@ -9,7 +9,8 @@ CONFIG += c++17 cmdline
 SOURCES += \
         filemanager.cpp \
         filestatistic.cpp \
-        main.cpp
+        main.cpp \
+        outputconsole.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -18,4 +19,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     filemanager.h \
-    filestatistic.h
+    filestatistic.h \
+    outputconsole.h
