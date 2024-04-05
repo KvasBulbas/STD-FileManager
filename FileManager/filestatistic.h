@@ -21,9 +21,8 @@ public:
 
 private:
     void newData(QFileInfo& file);
-    int _lastSize = 0;
+    int _size = 0;
     QString _path = "";
-    QString _lastName = "";
     QDateTime _lastChange = QDateTime();
 };
 

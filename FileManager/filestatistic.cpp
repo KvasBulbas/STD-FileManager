@@ -3,27 +3,23 @@
 
 FileStatistic::FileStatistic()
 {
-    _lastSize = 0;
+    _size = 0;
     _path = "";
-    _lastName = "";
     _lastChange = QDateTime();
-
 
 }
 
 FileStatistic::FileStatistic(QFileInfo& file)
 {
-    _lastSize = file.size();
-    _path = file.path();
-    _lastName = file.fileName();
+    _size = file.size();
+    _path = file.absoluteFilePath();
     _lastChange = file.metadataChangeTime();
 }
 
 FileStatistic::FileStatistic(const FileStatistic& stats)
 {
-    _lastSize = stats._lastSize;
+    _size = stats._size;
     _path = stats._path;
-    _lastName = stats._lastName;
     _lastChange = stats._lastChange;
 }
 
@@ -39,44 +35,39 @@ QString FileStatistic::getPath()
 
 int FileStatistic::getSize()
 {
-    return _lastSize;
+    return _size;
 }
 
 
 void FileStatistic::newData(QFileInfo& file)
 {
-    _lastSize = file.size();
-    _lastName = file.fileName();
+    _size = file.size();
     _lastChange = file.metadataChangeTime();
 }
 
 
 bool FileStatistic::pathCheck()
 {
-    QFileInfo info(_path + '/' + _lastName);
-    //qDebug() << info.fileName() << info.absolutePath() << info.size() << info.isFile();
+    QFileInfo info(_path);
+
     return info.isFile();
 }
 
 bool FileStatistic::isChanged()
 {
-    QString absolutePath = _path + '/' + _lastName;
-    QFileInfo file(absolutePath);
-
+    QFileInfo file(_path);
     if(file.isFile() && file.metadataChangeTime() != _lastChange)
     {
-
         newData(file);
         return true;
     }
-
 
     return false;
 }
 
 bool FileStatistic::operator ==(const FileStatistic stats)
 {
-    if(_path + _lastName == stats._path + stats._lastName)
+    if(_path == stats._path)
         return true;
     return false;
 }

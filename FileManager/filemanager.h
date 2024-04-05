@@ -22,23 +22,17 @@ public:
     bool deleteFile(const FileStatistic file);
     void checkFiles();
 
-    std::list<FileStatistic> files;
-
-
-
 signals:
-    //void changed(FileStatistic& stats);
     void changed(FileStatistic& stats);
     void deleted(FileStatistic& stats);
 
-public slots:
-    void abc(FileStatistic& stats);
 
 private:
     FileManager();
     ~FileManager();
     FileManager(FileManager const&);
     FileManager& operator=(FileManager const&);
+    std::list<FileStatistic> files;
 
 };
 

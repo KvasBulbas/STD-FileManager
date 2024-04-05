@@ -59,23 +59,32 @@ int main(int argc, char *argv[])
 
 
 
+    QFileInfo info("C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW.txt");
+    qDebug() << info.absoluteFilePath();
+
 
     FileManager &manager = FileManager::instanse();
     ConsoleOfOutput &console = ConsoleOfOutput::instanse();
+    QObject::connect(&manager, &FileManager::deleted, &console, &ConsoleOfOutput::deleteFileMessage);
     QObject::connect(&manager, &FileManager::changed, &console, &ConsoleOfOutput::changeFileMessage);
 
-    std::list<QString> paths =
+    std::list<QString> filePaths =
         {"C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW.txt",
          "C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW1.txt",
-          "C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW2.txt"};
+         "C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW2.txt"};
 
+    bool pathsIsCorrect = true;
+    for(auto iter = filePaths.begin(); iter != filePaths.end(); iter++)
+        if(!manager.addFile(*iter))
+            pathsIsCorrect = false;
 
-
-    if( manager.addFile("C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW1.txt"))
+    if(pathsIsCorrect)
+    {
         while(1)
-        {
             manager.checkFiles();
-        }
+    }
+    else
+        qDebug() << "some path is not correct";
 
 //    for(auto iter = manager.files.begin(); iter != manager.files.end(); iter++)
 //    {

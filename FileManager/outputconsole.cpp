@@ -14,12 +14,14 @@ ConsoleOfOutput::~ConsoleOfOutput()
 
 void ConsoleOfOutput::deleteFileMessage(FileStatistic& stats)
 {
-
+    qDebug() << "File" << stats.getPath() << "is delete.";
+    qDebug() << "size:" << stats.getSize();
 }
 
 
 void ConsoleOfOutput::changeFileMessage(FileStatistic& stats)
 {
-    qDebug() << "File" << stats.getPath() << "is changed." << "New size:" << stats.getSize();
+    qDebug() << "File" << stats.getPath() << "is changed.";
+    qDebug() << "size:" << stats.getSize();
 }
 
