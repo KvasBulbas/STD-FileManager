@@ -25,7 +25,7 @@ public:
 signals:
     void changed(FileStatistic& stats);
     void deleted(FileStatistic& stats);
-
+    void wrongPath(const QString path);
 
 private:
     FileManager();

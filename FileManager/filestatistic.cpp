@@ -1,5 +1,4 @@
 #include "filestatistic.h"'
-#include <QDebug>
 
 FileStatistic::FileStatistic()
 {
@@ -49,7 +48,6 @@ void FileStatistic::newData(QFileInfo& file)
 bool FileStatistic::pathCheck()
 {
     QFileInfo info(_path);
-
     return info.isFile();
 }
 
@@ -61,11 +59,10 @@ bool FileStatistic::isChanged()
         newData(file);
         return true;
     }
-
     return false;
 }
 
-bool FileStatistic::operator ==(const FileStatistic stats)
+bool FileStatistic::operator ==(const FileStatistic& stats)
 {
     if(_path == stats._path)
         return true;

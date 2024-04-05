@@ -17,14 +17,10 @@ public:
         return s;
     }
 
-
-
 public slots:
-    void deleteFileMessage(FileStatistic& stats);
-    void changeFileMessage(FileStatistic& stats);
-
-
-
+    void deleteFile_Message(FileStatistic& stats);
+    void changeFile_Message(FileStatistic& stats);
+    void wrongPath_Message(const QString path);
 
 private:
     ConsoleOfOutput();

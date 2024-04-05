@@ -17,7 +17,7 @@ public:
     QString getPath();
     int getSize();
 
-    bool operator==(const FileStatistic stats);
+    bool operator==(const FileStatistic& stats);
 
 private:
     void newData(QFileInfo& file);

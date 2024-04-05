@@ -19,9 +19,11 @@ bool FileManager::addFile(const QString& Path)
     if(info.isFile() && info.completeSuffix() == "txt")
     {
         FileStatistic stats(info);
-        this->files.push_back(stats);
+        files.push_back(stats);
         return true;
     }
+
+    emit wrongPath(Path);
     return false;
 }
 
