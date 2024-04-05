@@ -26,9 +26,13 @@ bool FileManager::addFile(const QString& Path)
     return false;
 }
 
-bool FileManager::deleteFile(const FileStatistic* file)
+bool FileManager::deleteFile(const FileStatistic file)
 {
+    int tempSize = files.size();
+    files.remove(file);
 
+    if(tempSize == files.size())
+        return true;
     return false;
 }
 
@@ -38,21 +42,24 @@ void FileManager::checkFiles()
 
     for(auto iter = files.begin(); iter != files.end(); iter++)
     {
-//        if(iter->pathCheck())
-//        {
-
-//            emit deleted(iter);
-//            files.remove(iter);
-//            qDebug << "File is deleted";
-
-//        }
-
-        if(iter->isChanged())
+        if(!iter->pathCheck())
         {
-           //emit changed(iter);
-            emit changed(*iter);
-           qDebug() << "File is changed";
+
+            //emit deleted(iter);
+            //files.remove(iter);
+
+            deleteFile(*iter);
+
+            qDebug() << "File is deleted";
+            break;
+
         }
+        else
+            if(iter->pathCheck() && iter->isChanged())
+            {
+                emit changed(*iter);
+               qDebug() << "File is changed";
+            }
 
     }
 }

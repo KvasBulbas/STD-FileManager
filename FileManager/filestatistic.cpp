@@ -19,6 +19,14 @@ FileStatistic::FileStatistic(QFileInfo& file)
     _lastChange = file.metadataChangeTime();
 }
 
+FileStatistic::FileStatistic(const FileStatistic& stats)
+{
+    _lastSize = stats._lastSize;
+    _path = stats._path;
+    _lastName = stats._lastName;
+    _lastChange = stats._lastChange;
+}
+
 FileStatistic::~FileStatistic()
 {
 
@@ -45,10 +53,9 @@ void FileStatistic::newData(QFileInfo& file)
 
 bool FileStatistic::pathCheck()
 {
-    QFileInfo info(_path);
-    if(info.isFile())
-        return true;
-    return false;
+    QFileInfo info(_path + '/' + _lastName);
+    //qDebug() << info.fileName() << info.absolutePath() << info.size() << info.isFile();
+    return info.isFile();
 }
 
 bool FileStatistic::isChanged()
@@ -64,6 +71,13 @@ bool FileStatistic::isChanged()
     }
 
 
+    return false;
+}
+
+bool FileStatistic::operator ==(const FileStatistic stats)
+{
+    if(_path + _lastName == stats._path + stats._lastName)
+        return true;
     return false;
 }
 

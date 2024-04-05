@@ -9,6 +9,7 @@ class FileStatistic
 public:
     FileStatistic();
     FileStatistic(QFileInfo& file);
+    FileStatistic(const FileStatistic& stats);
     ~FileStatistic();
 
     bool isChanged();
@@ -16,6 +17,7 @@ public:
     QString getPath();
     int getSize();
 
+    bool operator==(const FileStatistic stats);
 
 private:
     void newData(QFileInfo& file);

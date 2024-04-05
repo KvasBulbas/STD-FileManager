@@ -19,8 +19,12 @@ public:
     }
 
     bool addFile(const QString& path);
-    bool deleteFile(const FileStatistic* path);
+    bool deleteFile(const FileStatistic file);
     void checkFiles();
+
+    std::list<FileStatistic> files;
+
+
 
 signals:
     //void changed(FileStatistic& stats);
@@ -35,7 +39,6 @@ private:
     ~FileManager();
     FileManager(FileManager const&);
     FileManager& operator=(FileManager const&);
-    std::list<FileStatistic> files;
 
 };
 
