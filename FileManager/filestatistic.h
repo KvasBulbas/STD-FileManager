@@ -9,7 +9,6 @@ class FileStatistic
 public:
     FileStatistic();
     FileStatistic(QFileInfo& file);
-    FileStatistic(const FileStatistic& stats);
     ~FileStatistic();
 
     bool isChanged();
@@ -21,7 +20,7 @@ public:
 
 private:
     void newData(QFileInfo& file);
-    int _size = 0;
+    int _size  = 0;
     QString _path = "";
     QDateTime _lastChange = QDateTime();
 };

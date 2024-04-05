@@ -13,7 +13,7 @@ FileManager::~FileManager()
 
 }
 
-bool FileManager::addFile(const QString& Path)
+bool FileManager::addFile(QString& Path)
 {
     QFileInfo info(Path);
     if(info.isFile() && info.completeSuffix() == "txt")

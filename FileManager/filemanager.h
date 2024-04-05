@@ -18,7 +18,7 @@ public:
         return s;
     }
 
-    bool addFile(const QString& path);
+    bool addFile(QString& path);
     bool deleteFile(const FileStatistic file);
     void checkFiles();
 

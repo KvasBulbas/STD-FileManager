@@ -15,12 +15,6 @@ FileStatistic::FileStatistic(QFileInfo& file)
     _lastChange = file.metadataChangeTime();
 }
 
-FileStatistic::FileStatistic(const FileStatistic& stats)
-{
-    _size = stats._size;
-    _path = stats._path;
-    _lastChange = stats._lastChange;
-}
 
 FileStatistic::~FileStatistic()
 {

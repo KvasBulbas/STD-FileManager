@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
     QObject::connect(&manager, &FileManager::wrongPath, &console, &ConsoleOfOutput::wrongPath_Message);
 
     std::list<QString> filePaths =
-
         {"C:/QtProjects/WidgetsQT/STD-FileManager/Files/Ff12LW.txt",
          "C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW.txt",
          "C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW1.txt",
