@@ -33,7 +33,7 @@ bool FileManager::deleteFile(const QString& path)
         for(auto iter = files.begin(); iter != files.end(); iter++)
             if(iter->absoluteFilePath() == path)
             {
-                emit deleting(*iter);
+                emit deleting(path);
                 files.remove(*iter);
                 return true;
             }
@@ -53,8 +53,13 @@ void FileManager::checkFiles()
             break;
         }
         else
-            if(iter->isChanged())
+            if(iter->isChanged() && iter->isFile())
+        {
+            {
+                qDebug() << iter->isFile();
                 emit changed(*iter);
+            }
+        }
     }
 }
 

@@ -6,11 +6,8 @@
 #include <QDir>
 #include <QFile>
 
-int main(int argc, char *argv[])
+void createDirectory(QString dirPath)
 {
-
-    //создание директории с файлами для тестов
-    QString dirPath = "C:/QtProjects/WidgetsQT/STD-FileManager/FilesShamonin";
     QDir dir;
     if(dir.mkpath(dirPath))
         qDebug() << "dir is create";
@@ -23,9 +20,14 @@ int main(int argc, char *argv[])
         file.open(QIODevice::WriteOnly);
         file.close();
     }
+}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-    //основная программа
+int main(int argc, char *argv[])
+{
+    //создание директории с файлами для тестов
+    QString dirPath = "C:/QtProjects/WidgetsQT/STD-FileManager/FilesShamonin";
+    createDirectory(dirPath);
+
     QCoreApplication a(argc, argv);
 
     FileManager &manager = FileManager::instanse();
@@ -44,7 +46,7 @@ int main(int argc, char *argv[])
     //пытаемся удалить существущий файл из пустого менеджера
     manager.deleteFile(dirPath + "/forDelete.txt");
 
-    std::list<QString> fileNames2 ={"/Ffasdasdj.txt",//неверное имя файла
+    std::list<QString> fileNames ={"/Ffasdasdj.txt",//неверное имя файла
                                      "/FfLW1.txt",
                                      "/FfLW2.txt",
                                      "/FfLW3.txt",
@@ -53,7 +55,7 @@ int main(int argc, char *argv[])
                                      "/forDelete.txt"};
 
     //добавление файлов с коректными и не коректоными путями
-    for(auto iter = fileNames2.begin(); iter != fileNames2.end(); iter++)
+    for(auto iter = fileNames.begin(); iter != fileNames.end(); iter++)
         manager.addFile(dirPath + *iter);
 
     // пытаемся удалить не существущий файл из не пустого менеджера

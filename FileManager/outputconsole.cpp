@@ -11,9 +11,9 @@ ConsoleOfOutput::~ConsoleOfOutput()
 
 }
 
-void ConsoleOfOutput::deleteFile_Message(const FileChecker& checker)
+void ConsoleOfOutput::deleteFile_Message(const QString path)
 {
-    qDebug() << "DeleteFie: File" << checker.absoluteFilePath() << "is delete.\n";
+    qDebug() << "DeleteFile: File" << path << "is delete.\n";
 }
 
 void ConsoleOfOutput::changeFile_Message(const FileChecker& checker)
@@ -31,12 +31,12 @@ void ConsoleOfOutput::addFile_Message(const FileChecker& checker)
 
 void ConsoleOfOutput::addFile_wrongPath_Message(const QString path)
 {
-    qDebug() << "Addfile: The file" << path << "not added because the path was specified incorrectly\n";
+    qDebug() << "AddFile: The file" << path << "not added because the path was specified incorrectly\n";
 }
 
 void ConsoleOfOutput::deleteFile_wrongPath_Message(const QString path)
 {
-    qDebug() << "Deletefile: The file" << path << "not deleted because the path was specified incorrectly or manager is empty\n";
+    qDebug() << "DeleteFile: The file" << path << "not deleted because the path was specified incorrectly or manager is empty\n";
 }
 
 
