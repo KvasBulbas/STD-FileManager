@@ -54,12 +54,8 @@ void FileManager::checkFiles()
         }
         else
             if(iter->isChanged() && iter->isFile())
-        {
-            {
-                qDebug() << iter->isFile();
                 emit changed(*iter);
-            }
-        }
+
     }
 }
 
