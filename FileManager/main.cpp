@@ -3,13 +3,34 @@
 #include "filemanager.h"
 #include "outputconsole.h"
 #include <List>
+#include <QDir>
+#include <QFile>
 
 int main(int argc, char *argv[])
 {
+
+    //создание директории с файлами для тестов
+    QString dirPath = "C:/QtProjects/WidgetsQT/STD-FileManager/FilesShamonin";
+    QDir dir;
+    if(dir.mkpath(dirPath))
+        qDebug() << "dir is create";
+
+
+    std::list<QString> fileNames ={"/FfLW1.txt", "/FfLW2.txt", "/FfLW3.txt", "/FfLW4.txt", "/forDelete.txt"};
+    for(auto iter = fileNames.begin(); iter != fileNames.end(); iter++)
+    {
+        QFile file(dirPath + *iter);
+        file.open(QIODevice::WriteOnly);
+        file.close();
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+    //основная программа
     QCoreApplication a(argc, argv);
 
     FileManager &manager = FileManager::instanse();
     ConsoleOfOutput &console = ConsoleOfOutput::instanse();
+
     QObject::connect(&manager, &FileManager::adding, &console, &ConsoleOfOutput::addFile_Message);
     QObject::connect(&manager, &FileManager::deleting, &console, &ConsoleOfOutput::deleteFile_Message);
     QObject::connect(&manager, &FileManager::changed, &console, &ConsoleOfOutput::changeFile_Message);
@@ -17,39 +38,29 @@ int main(int argc, char *argv[])
     QObject::connect(&manager, &FileManager::deleting_wrongPath, &console, &ConsoleOfOutput::deleteFile_wrongPath_Message);
 
 
-//    FileChecker abc("C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW.txt");
-//    qDebug() <<  abc.isFile();
-
-//    while(1)
-//    {
-//        if(abc.isChanged())
-//            qDebug() << "asdasd";
-//    }
-
-
-
-    std::list<QString> filePaths =
-        {"C:/QtProjects/WidgetsQT/STD-FileManager/Files/Ff12LW.txt",//указан не корректный путь
-         "C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW.txt",
-         "C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW1.txt",
-         "C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW2.txt",
-         "C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW12.txt"};//указан не корректный путь
-
     //пытаемся удалить не существущий файл из пустого менеджера
     manager.deleteFile("asdasdasd");
 
     //пытаемся удалить существущий файл из пустого менеджера
-    manager.deleteFile("C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW.txt");
+    manager.deleteFile(dirPath + "/forDelete.txt");
 
-    //добавление файлов с коректными и не корректными путями
-    for(auto iter = filePaths.begin(); iter != filePaths.end(); iter++)
-        manager.addFile(*iter);
+    std::list<QString> fileNames2 ={"/Ffasdasdj.txt",//неверное имя файла
+                                     "/FfLW1.txt",
+                                     "/FfLW2.txt",
+                                     "/FfLW3.txt",
+                                     "/Fajsdsdj.txt",//неверное имя файла
+                                     "/FfLW4.txt",
+                                     "/forDelete.txt"};
+
+    //добавление файлов с коректными и не коректоными путями
+    for(auto iter = fileNames2.begin(); iter != fileNames2.end(); iter++)
+        manager.addFile(dirPath + *iter);
 
     // пытаемся удалить не существущий файл из не пустого менеджера
     manager.deleteFile("asdasdasd");
 
-    //удаляем существущий файл из менеджера перед тем, как запустить проверку состояний файлов
-    manager.deleteFile("C:/QtProjects/WidgetsQT/STD-FileManager/Files/FfLW.txt");
+   //удаляем существущий файл из менеджера перед тем, как запустить проверку состояний файлов
+    manager.deleteFile(dirPath + "/forDelete.txt");
     while(1)
         manager.checkFiles();
 

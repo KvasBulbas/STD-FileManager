@@ -18,9 +18,9 @@ public:
     }
 
 public slots:
-    void deleteFile_Message(FileChecker& checker);
-    void changeFile_Message(FileChecker& checker);
-    void addFile_Message(FileChecker& checker);
+    void deleteFile_Message(const FileChecker& checker);
+    void changeFile_Message(const FileChecker& checker);
+    void addFile_Message(const FileChecker& checker);
     void addFile_wrongPath_Message(const QString path);
     void deleteFile_wrongPath_Message(const QString path);
 private:

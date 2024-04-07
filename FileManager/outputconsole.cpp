@@ -11,18 +11,18 @@ ConsoleOfOutput::~ConsoleOfOutput()
 
 }
 
-void ConsoleOfOutput::deleteFile_Message(FileChecker& checker)
+void ConsoleOfOutput::deleteFile_Message(const FileChecker& checker)
 {
     qDebug() << "DeleteFie: File" << checker.absoluteFilePath() << "is delete.\n";
 }
 
-void ConsoleOfOutput::changeFile_Message(FileChecker& checker)
+void ConsoleOfOutput::changeFile_Message(const FileChecker& checker)
 {
     qDebug() << "File" << checker.absoluteFilePath() << "is changed.";
     qDebug() << "size:" << checker.size() << '\n';
 }
 
-void ConsoleOfOutput::addFile_Message(FileChecker& checker)
+void ConsoleOfOutput::addFile_Message(const FileChecker& checker)
 {
     qDebug() << "AddFile: File" << checker.absoluteFilePath() << "has been added to the manager.";
     qDebug() << "size:" << checker.size() << '\n';

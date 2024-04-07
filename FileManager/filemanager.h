@@ -24,9 +24,9 @@ public:
     void checkFiles();
 
 signals:
-    void changed(FileChecker& checker);
-    void deleting(FileChecker& checker);
-    void adding(FileChecker& checker);
+    void changed(const FileChecker& checker);
+    void deleting(const FileChecker& checker);
+    void adding(const FileChecker& checker);
     void adding_wrongPath(const QString path);
     void deleting_wrongPath(const QString path);
 
