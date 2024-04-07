@@ -11,6 +11,7 @@ class FileManager : public QObject
     Q_OBJECT
 public:
 
+
     static FileManager& instanse()
     {
         static FileManager s;
@@ -18,21 +19,24 @@ public:
         return s;
     }
 
-    bool addFile(QString& path);
-    bool deleteFile(const FileStatistic file);
+    bool addFile(const QString& path);
+    bool deleteFile(const QString& path);
     void checkFiles();
 
 signals:
-    void changed(FileStatistic& stats);
-    void deleted(FileStatistic& stats);
-    void wrongPath(const QString path);
+    void changed(const FileChecker& checker);
+    void deleting(const QString path);
+    void adding(const FileChecker& checker);
+    void adding_wrongPath(const QString path);
+    void deleting_wrongPath(const QString path);
 
 private:
+
     FileManager();
     ~FileManager();
     FileManager(FileManager const&);
     FileManager& operator=(FileManager const&);
-    std::list<FileStatistic> files;
+    std::list<FileChecker> files;
 
 };
 

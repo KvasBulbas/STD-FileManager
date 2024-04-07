@@ -1,65 +1,15 @@
 #include "filestatistic.h"'
 
-FileStatistic::FileStatistic()
+
+bool FileChecker::isChanged()
 {
-    _size = 0;
-    _path = "";
-    _lastChange = QDateTime();
-
-}
-
-FileStatistic::FileStatistic(QFileInfo& file)
-{
-    _size = file.size();
-    _path = file.absoluteFilePath();
-    _lastChange = file.metadataChangeTime();
-}
-
-
-FileStatistic::~FileStatistic()
-{
-
-}
-
-QString FileStatistic::getPath()
-{
-    return _path;
-}
-
-int FileStatistic::getSize()
-{
-    return _size;
-}
-
-
-void FileStatistic::newData(QFileInfo& file)
-{
-    _size = file.size();
-    _lastChange = file.metadataChangeTime();
-}
-
-
-bool FileStatistic::pathCheck()
-{
-    QFileInfo info(_path);
-    return info.isFile();
-}
-
-bool FileStatistic::isChanged()
-{
-    QFileInfo file(_path);
-    if(file.isFile() && file.metadataChangeTime() != _lastChange)
+    if(isFile())
     {
-        newData(file);
-        return true;
+        QDateTime temp = metadataChangeTime();
+        refresh();
+        if(temp != metadataChangeTime())
+            return true;
     }
-    return false;
-}
-
-bool FileStatistic::operator ==(const FileStatistic& stats)
-{
-    if(_path == stats._path)
-        return true;
     return false;
 }
 

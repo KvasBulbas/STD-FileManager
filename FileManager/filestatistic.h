@@ -4,25 +4,12 @@
 #include <QTime>
 
 
-class FileStatistic
+class FileChecker : public QFileInfo
 {
 public:
-    FileStatistic();
-    FileStatistic(QFileInfo& file);
-    ~FileStatistic();
-
+    FileChecker(const QString& path) : QFileInfo(path) {}
     bool isChanged();
-    bool pathCheck();
-    QString getPath();
-    int getSize();
-
-    bool operator==(const FileStatistic& stats);
-
-private:
-    void newData(QFileInfo& file);
-    int _size  = 0;
-    QString _path = "";
-    QDateTime _lastChange = QDateTime();
 };
+
 
 #endif // FILESTATISTIC_H

@@ -11,19 +11,33 @@ ConsoleOfOutput::~ConsoleOfOutput()
 
 }
 
-void ConsoleOfOutput::deleteFile_Message(FileStatistic& stats)
+void ConsoleOfOutput::deleteFile_Message(const QString path)
 {
-    qDebug() << "File" << stats.getPath() << "is delete.";
+    qDebug() << "DeleteFile: File" << path << "is delete.\n";
 }
 
-void ConsoleOfOutput::changeFile_Message(FileStatistic& stats)
+void ConsoleOfOutput::changeFile_Message(const FileChecker& checker)
 {
-    qDebug() << "File" << stats.getPath() << "is changed.";
-    qDebug() << "size:" << stats.getSize();
+    qDebug() << "File" << checker.absoluteFilePath() << "is changed.";
+    qDebug() << "size:" << checker.size() << '\n';
 }
 
-void ConsoleOfOutput::wrongPath_Message(const QString path)
+void ConsoleOfOutput::addFile_Message(const FileChecker& checker)
 {
-    qDebug() << "The file" << path << "not added because the path was specified incorrectly";
+    qDebug() << "AddFile: File" << checker.absoluteFilePath() << "has been added to the manager.";
+    qDebug() << "size:" << checker.size() << '\n';
 }
+
+
+void ConsoleOfOutput::addFile_wrongPath_Message(const QString path)
+{
+    qDebug() << "AddFile: The file" << path << "not added because the path was specified incorrectly\n";
+}
+
+void ConsoleOfOutput::deleteFile_wrongPath_Message(const QString path)
+{
+    qDebug() << "DeleteFile: The file" << path << "not deleted because the path was specified incorrectly or manager is empty\n";
+}
+
+
 

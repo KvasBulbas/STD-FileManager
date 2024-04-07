@@ -13,27 +13,32 @@ FileManager::~FileManager()
 
 }
 
-bool FileManager::addFile(QString& Path)
+bool FileManager::addFile(const QString& path)
 {
-    QFileInfo info(Path);
-    if(info.isFile() && info.completeSuffix() == "txt")
+    FileChecker checker(path);
+    if(checker.isFile())
     {
-        FileStatistic stats(info);
-        files.push_back(stats);
+        files.push_back(checker);
+        emit adding(checker);
         return true;
     }
 
-    emit wrongPath(Path);
+    emit adding_wrongPath(path);
     return false;
 }
 
-bool FileManager::deleteFile(const FileStatistic file)
+bool FileManager::deleteFile(const QString& path)
 {
-    int tempSize = files.size();
-    files.remove(file);
+    if(files.size() != 0)
+        for(auto iter = files.begin(); iter != files.end(); iter++)
+            if(iter->absoluteFilePath() == path)
+            {
+                emit deleting(path);
+                files.remove(*iter);
+                return true;
+            }
 
-    if(tempSize == files.size())
-        return true;
+    emit deleting_wrongPath(path);
     return false;
 }
 
@@ -42,15 +47,15 @@ void FileManager::checkFiles()
 {
     for(auto iter = files.begin(); iter != files.end(); iter++)
     {
-        if(!iter->pathCheck())
+        if(!iter->isFile())
         {
-            emit deleted(*iter);
-            deleteFile(*iter);
+            deleteFile(iter->absoluteFilePath());
             break;
         }
         else
-            if(iter->pathCheck() && iter->isChanged())
+            if(iter->isChanged() && iter->isFile())
                 emit changed(*iter);
+
     }
 }
 
