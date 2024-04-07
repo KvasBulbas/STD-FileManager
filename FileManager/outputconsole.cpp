@@ -11,21 +11,21 @@ ConsoleOfOutput::~ConsoleOfOutput()
 
 }
 
-void ConsoleOfOutput::deleteFile_Message(FileStatistic& stats)
+void ConsoleOfOutput::deleteFile_Message(FileChecker& checker)
 {
-    qDebug() << "DeleteFie: File" << stats.getPath() << "is delete.\n";
+    qDebug() << "DeleteFie: File" << checker.absoluteFilePath() << "is delete.\n";
 }
 
-void ConsoleOfOutput::changeFile_Message(FileStatistic& stats)
+void ConsoleOfOutput::changeFile_Message(FileChecker& checker)
 {
-    qDebug() << "File" << stats.getPath() << "is changed.";
-    qDebug() << "size:\n" << stats.getSize() << '\n';
+    qDebug() << "File" << checker.absoluteFilePath() << "is changed.";
+    qDebug() << "size:" << checker.size() << '\n';
 }
 
-void ConsoleOfOutput::addFile_Message(FileStatistic& stats)
+void ConsoleOfOutput::addFile_Message(FileChecker& checker)
 {
-    qDebug() << "AddFile: File" << stats.getPath() << "has been added to the manager.";
-    qDebug() << "size:" << stats.getSize() << '\n';
+    qDebug() << "AddFile: File" << checker.absoluteFilePath() << "has been added to the manager.";
+    qDebug() << "size:" << checker.size() << '\n';
 }
 
 

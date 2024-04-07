@@ -15,12 +15,11 @@ FileManager::~FileManager()
 
 bool FileManager::addFile(const QString& path)
 {
-    QFileInfo info(path);
-    if(info.isFile())
+    FileChecker checker(path);
+    if(checker.isFile())
     {
-        FileStatistic stats(info);
-        files.push_back(stats);
-        emit adding(stats);
+        files.push_back(checker);
+        emit adding(checker);
         return true;
     }
 
@@ -32,7 +31,7 @@ bool FileManager::deleteFile(const QString& path)
 {
     if(files.size() != 0)
         for(auto iter = files.begin(); iter != files.end(); iter++)
-            if(iter->getPath() == path)
+            if(iter->absoluteFilePath() == path)
             {
                 emit deleting(*iter);
                 files.remove(*iter);
@@ -48,13 +47,13 @@ void FileManager::checkFiles()
 {
     for(auto iter = files.begin(); iter != files.end(); iter++)
     {
-        if(!iter->pathCheck())
+        if(!iter->isFile())
         {
-            deleteFile(iter->getPath());
+            deleteFile(iter->absoluteFilePath());
             break;
         }
         else
-            if(iter->pathCheck() && iter->isChanged())
+            if(iter->isChanged())
                 emit changed(*iter);
     }
 }
