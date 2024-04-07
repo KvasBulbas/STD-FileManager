@@ -8,7 +8,15 @@ FileStatistic::FileStatistic()
 
 }
 
-FileStatistic::FileStatistic(QFileInfo& file)
+FileStatistic::FileStatistic(const FileStatistic& stats)
+{
+    _size = stats._size;
+    _path = stats._path;
+    _lastChange = stats._lastChange;
+}
+
+
+FileStatistic::FileStatistic(const QFileInfo& file)
 {
     _size = file.size();
     _path = file.absoluteFilePath();

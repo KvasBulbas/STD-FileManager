@@ -8,7 +8,8 @@ class FileStatistic
 {
 public:
     FileStatistic();
-    FileStatistic(QFileInfo& file);
+    FileStatistic(const FileStatistic& stats);
+    FileStatistic(const QFileInfo& file);
     ~FileStatistic();
 
     bool isChanged();

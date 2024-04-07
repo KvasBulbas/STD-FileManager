@@ -20,8 +20,9 @@ public:
 public slots:
     void deleteFile_Message(FileStatistic& stats);
     void changeFile_Message(FileStatistic& stats);
-    void wrongPath_Message(const QString path);
-
+    void addFile_Message(FileStatistic& stats);
+    void addFile_wrongPath_Message(const QString path);
+    void deleteFile_wrongPath_Message(const QString path);
 private:
     ConsoleOfOutput();
     ~ConsoleOfOutput();
