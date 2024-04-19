@@ -25,10 +25,11 @@ public:
 
 signals:
     void changed(const FileChecker& checker);
-    void deleting(const QString path);
-    void adding(const FileChecker& checker);
+    void notFound(const FileChecker& checker);
+    void isFound(const FileChecker& checker);
     void adding_wrongPath(const QString path);
     void deleting_wrongPath(const QString path);
+
 
 private:
 
