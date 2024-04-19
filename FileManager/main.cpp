@@ -15,7 +15,7 @@ void createDirectory(QString dirPath)
         qDebug() << "dir is create";
 
 
-    std::list<QString> fileNames ={"/FfLW1.txt", "/FfLW2.txt", "/FfLW3.txt", "/FfLW4.txt", "/forDelete.txt"};
+    std::list<QString> fileNames ={"/FfLW1.txt", "/FfLW2.txt", "/FfLW3.txt", "/FfLW4.txt"/*, "/forDelete.txt"*/};
     for(auto iter = fileNames.begin(); iter != fileNames.end(); iter++)
     {
         QFile file(dirPath + *iter);
@@ -50,13 +50,16 @@ int main(int argc, char *argv[])
     //пытаемся удалить существущий файл из пустого менеджера
     //manager.deleteFile(dirPath + "/forDelete.txt");
 
-    std::list<QString> fileNames ={//"/Ffasdasdj.txt",//неверное имя файла
-                                     "/FfLW1.txt",
-                                     "/FfLW2.txt",
-                                     "/FfLW3.txt",
-                                     //"/Fajsdsdj.txt",//неверное имя файла
-                                     "/FfLW4.txt",
-                                     "/forDelete.txt"};
+    std::list<QString> fileNames =
+    {
+        //"/Ffasdasdj.txt",//неверное имя файла
+         "/FfLW1.txt",
+         "/FfLW2.txt",
+         "/FfLW3.txt",
+         //"/Fajsdsdj.txt",//неверное имя файла
+         "/FfLW4.txt"
+        /*,"/forDelete.txt"*/
+    };
 
     //добавление файлов с коректными и не коректоными путями
     for(auto iter = fileNames.begin(); iter != fileNames.end(); iter++)
@@ -67,7 +70,6 @@ int main(int argc, char *argv[])
 
     //удаляем существущий файл из менеджера перед тем, как запустить проверку состояний файлов
     //manager.deleteFile(dirPath + "/forDelete.txt");
-
 
 
     while(1)
