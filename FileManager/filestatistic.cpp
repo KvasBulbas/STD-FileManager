@@ -1,15 +1,44 @@
-#include "filestatistic.h"'
+#include "filestatistic.h"
 
 
 bool FileChecker::isChanged()
 {
-    if(isFile())
+    QDateTime temp;
+
+    switch(currentState)
     {
-        QDateTime temp = metadataChangeTime();
+    case Created:
+    case Changed:
+        temp = metadataChangeTime();
         refresh();
-        if(temp != metadataChangeTime())
+        if(isFile())
+        {
+            if(temp != metadataChangeTime())
+            {
+                currentState = Changed;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            currentState = Deleted;
             return true;
+        }
+    case Deleted:
+        refresh();
+        if(isFile())
+        {
+            currentState = Created;
+            return true;
+        }
+
     }
+
     return false;
 }
+
 

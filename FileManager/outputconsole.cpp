@@ -11,9 +11,9 @@ ConsoleOfOutput::~ConsoleOfOutput()
 
 }
 
-void ConsoleOfOutput::deleteFile_Message(const QString path)
+void ConsoleOfOutput::notFound_Message(const FileChecker& checker)
 {
-    qDebug() << "DeleteFile: File" << path << "is delete.\n";
+    qDebug() << "DeleteFile: File" << checker.absoluteFilePath() << "not exist.\n";
 }
 
 void ConsoleOfOutput::changeFile_Message(const FileChecker& checker)
