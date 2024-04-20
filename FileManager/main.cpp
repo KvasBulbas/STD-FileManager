@@ -30,7 +30,6 @@ int main(int argc, char *argv[])
     QString dirPath = "C:/QtProjects/WidgetsQT/STD-FileManager/FilesShamonin";
     createDirectory(dirPath);
 
-    system("cls");
 
     QCoreApplication a(argc, argv);
 
