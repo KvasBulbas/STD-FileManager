@@ -2,6 +2,8 @@
 #include <QTime>
 #include <QString>
 #include <QDebug>
+#include "filestatistic.h"
+
 
 FileManager::FileManager()
 {
@@ -48,15 +50,22 @@ void FileManager::checkFiles()
     {
         if(iter->isChanged())
         {
-            if(iter->getState() == "Created")
-                emit isFound(*iter);
 
-            if(iter->getState() == "Changed")
-                emit changed(*iter);
-
-            if(iter->getState() == "Deleted")
-                emit notFound(*iter);
+            switch(iter->getState())
+            {
+                case FileChecker::Created:
+                    emit isFound(*iter);
+                    break;
+                case FileChecker::Changed:
+                    emit changed(*iter);
+                    break;
+                case FileChecker::Deleted:
+                    emit notFound(*iter);
+            }
         }
+
+
+
 
     }
 }
